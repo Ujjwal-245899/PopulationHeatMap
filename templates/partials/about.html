@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>About Us - Population Heat Map</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Body styles */
+
+
+    body {
+      width: 100%;
+      height: 120vh;
+      font-family: cursive;
+      margin: 0;
+      padding: 0;
+      /* background-image: url('https://images.pexels.com/photos/7412043/pexels-photo-7412043.jpeg?auto=compress&cs=tinysrgb&w=600');  */
+      /* background-image: url('https://images.pexels.com/photos/1252500/pexels-photo-1252500.jpeg?auto=compress&cs=tinysrgb&w=600'); */
+      /* background-image: url('https://cdn.pixabay.com/photo/2017/07/22/11/46/adventure-2528477_640.jpg'); */
+       background-image: url('https://images.pexels.com/photos/101841/pexels-photo-101841.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); 
+     /* background-image: url('https://images.pexels.com/photos/189298/pexels-photo-189298.jpeg?auto=compress&cs=tinysrgb&w=600'); */
+     /* background-image: url('https://images.pexels.com/photos/7634436/pexels-photo-7634436.jpeg?auto=compress&cs=tinysrgb&w=600');  */
+     background-size: contain;
+    background-position: center;
+    overflow: auto;
+     animation: backgroundAnimation 20s linear infinite;
+      
+
+      
+    }
+
+    /* Blur overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(20px);
+
+      z-index: -1;
+    }
+    
+
+
+    /* Navigation bar styles */
+    .navbar {
+      background-color: #333;
+      overflow: hidden;
+      text-align: center;
+      background-color:black;
+      overflow: hidden;
+      text-align: center;
+      height: 44px;
+      padding-top: 14px;
+      
+
+    }
+
+     .navbar a {
+      float: inline-start  block;
+      color: #fff;
+
+      text-align: center;
+      padding: 20px 16px;
+
+      text-decoration: none;
+      text-align: center;
+
+
+    } 
+
+    .navbar a:hover {
+
+      background-color: rgb(16, 17, 9);
+      color: white;
+      text-align: center;
+      font-size: 20px;
+    
+
+
+    }
+
+
+
+
+    /* Header styles */
+    header h1 {
+      /* background-color: #33d5a2; */
+      color: black;
+      padding: 20px;
+      text-align: center;
+     
+      background: linear-gradient(to right, #00cc99, #ffff66);
+
+
+      background-size: 200% 100%;
+      animation: gradientAnimation 10s ease infinite;
+
+
+
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      animation: fadeInDown 1s ease;
+      
+    }
+
+
+    /* Main content styles */
+    .container {
+      max-width: 2000px;
+      margin: 0 auto;
+      padding: 40px;
+      animation: zoomIn 1s ease;
+      display: flex;
+      position: relative;
+      align-items: last baseline;
+      overflow-y: auto;
+    }
+
+
+
+    .content {
+      /* flex-grow: 1; */
+      /* background-color: white; */
+      
+      /* backdrop-filter: blur(10px); */
+      padding: 20px;
+      border-radius: 3%;
+      position: inherit;
+      color: #fff;
+    }
+
+    .content:hover {
+      background-color: rgba(255, 255, 255, 1);
+      
+      color: #333;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content h2:hover {
+      color: #ff0000;
+    }
+
+    .content p:hover {
+      font-weight: bold;
+    }
+
+    .content ul:hover {
+      text-decoration: underline;
+    }
+
+    .content li:hover {
+      color: #0a0b0a;
+      font-weight: bold;
+    }
+ /* @keyframes vikash {
+   0%{color: blue; }
+   30%{color: black;}
+   50%{color: #046a04;}
+   80%{color: #00ff00;}
+   100%{color: rgb(238, 7, 7);} */
+ 
+
+    h2 {
+      font-size: 30px;
+     
+      font-family: initial;
+      animation: vikash  2s ease-in-out   infinite ;
+
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease;
+    }
+
+    /* Image tiles */
+    .image-tiles {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: 20px;
+      animation: bounce 1s infinite;
+    }
+
+    .image-tile {
+      width: 250px;
+      height: 350px;
+      background-color: #0a0000;
+      margin-bottom: 1svh;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      /* border: 2px solid #ffae57; */
+      /* border-radius: 3px; */
+      display: inline-block;
+      animation: bounce 1s infinite;
+      bottom:10%;
+    }
+
+    .image-tile:hover {
+      
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(18, 239, 2, 0.5);
+    }
+
+    .image-tile img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display:flex;
+      transition: box-shadow 0.3s ease-in-out;
+
+    }
+    
+    .text-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.1s ease;
+    }
+
+    .container:hover .text-overlay {
+      opacity: 3;
+    }
+
+    /* Link styles */
+    .text-overlay a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Animation styles */
+    /* background animation  */
+    @keyframes backgroundAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes zoomIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Animation keyframes ----------Gradient-------- */
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 90%;
+      }
+      100% {
+        background-position: 100% 80%;
+      }
+    }
+    /* bounce  */
+    @keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+
+    .footer {
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+
+    }
+
+    .footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Population Heat Map <i class="fa-solid fa-map fa-beat"></i> </h1>
+  </header>
+  <div class="navbar">
+    <a href="{%url 'Main'%}">Home</a>
+    <a href="#About"></a>
+    <a href="{%url 'ContactPage'%}">Contact</a>
+  </div>
+
+  <div class="container">
+    <div class="image-tiles">
+      <div class="image-tile">
+        <img src="https://images.pexels.com/photos/17127723/pexels-photo-17127723/free-photo-of-camera-and-map-on-a-branch-in-the-forest.jpeg?auto=compress&cs=tinysrgb&w=600"
+          alt="Image 1">
+          <div class="text-overlay">
+            <a href="https://en.wikipedia.org/wiki/Heat_map">Learn more </a>
+          </div>
+      </div>
+      <!-- <div class="image-tile">
+        <img src="https://images.pexels.com/photos/6109670/pexels-photo-6109670.jpeg?auto=compress&cs=tinysrgb&w=600"
+          alt="Image 2">
+      </div>
+      <div class="image-tile">
+        <img src="https://images.pexels.com/photos/592753/pexels-photo-592753.jpeg?auto=compress&cs=tinysrgb&w=600"
+          alt="Image 3">
+      </div> -->
+      <!-- Add more image tiles as needed -->
+    </div>
+
+    <div class="content">
+      <span>
+        <u><h2>About Us</h2></u>
+      </span>
+      <p>The Population Heat Map project aims to provide an interactive visualization of population data using heat
+        maps. Our goal is to help users explore and analyze population distribution and density patterns across
+        different geographic regions.</p>
+
+      <p>Through the use of color-coded intensity, we present population data in a visually appealing and informative
+        way. By studying the heat map, users can identify areas of high population concentration, observe trends, and
+        gain valuable insights for various applications such as urban planning, demographic analysis, and market
+        research.</p>
+
+      <p>Our team of data scientists and developers is dedicated to continuously improving the Population Heat Map
+        platform, incorporating new features and data sources to enhance the user experience and provide the most
+        accurate and up-to-date population information.</p>
+
+
+      <ul>
+        <h2>Key Features:</h2>
+        <li>Interactive heat maps for visualizing population distribution and density</li>
+        <li>Zoom and pan functionality to explore specific regions and areas</li>
+        <li>Filtering options to focus on specific population segments or characteristics</li>
+        <li>Additional demographic data layers for deeper analysis</li>
+        <li>User-friendly interface for easy navigation and exploration</li>
+        <li>Regular updates and inclusion of the latest population data</li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+
+
+  <footer class="footer">
+    <p>&copy; 2023 Population Heat Map. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>

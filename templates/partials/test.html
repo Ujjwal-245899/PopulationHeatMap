@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+  <title>Population Heat Map</title>
+
+  <style>
+    /* Body styles */
+    
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: cursive;
+      margin: 0;
+      padding: 0;
+     
+    }
+
+    @keyframes backgroundAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+
+    /* Header styles */
+    header {
+      /* background-color: #12be99; */
+      /* background-color: #33d5a2; */
+      color: #111111;
+      padding: 10px;
+      text-align: center;
+      background: linear-gradient(to right, #00cc99, #ffff66);
+
+
+      background-size: 200% 100%;
+      animation: gradientAnimation 10s ease infinite;
+      
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      animation: fadeInDown 1s ease;
+    }
+
+    /* Navigation styles */
+    .navbar {
+      background-color: #333;
+      overflow: hidden;
+      text-align: center;
+      background-color:black;
+      overflow: hidden;
+      text-align: center;
+      height: 44px;
+      padding-top: 14px;
+      
+
+    }
+
+     .navbar a {
+      float: inline-start  block;
+      color: #fff;
+
+      text-align: center;
+      padding: 35px 16px;
+
+      text-decoration: none;
+      text-align: center;
+
+
+    } 
+
+    .navbar a:hover {
+
+      background-color: rgb(16, 17, 9);
+      color: white;
+      text-align: center;
+      font-size: 20px;
+    
+
+
+    }
+
+    /* Main content styles */
+    .container1 {
+      
+      width: 100%;
+      height: 85vh;
+
+      animation: backgroundAnimation 20s linear infinite;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      background: fixed;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 8888888888 ;
+      justify-content: center;
+      background-image: url('https://cdn.pixabay.com/photo/2021/01/19/20/28/earth-5932372_1280.png');
+      background-position: center;
+      width: 100%;
+      color: #fff;
+      text-align: center;
+    }
+
+    .content {
+      height: 65vh;
+      width: 900px;
+      position: relative;
+     display: inline-block;
+     animation: bounce 1s infinite;
+     margin-bottom: 0%;
+    }
+
+    .content h2 {
+      padding: 28px;
+      font-size: 58px;
+    }
+
+
+    h2 {
+      /* font-size: 24px; */
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease;
+    }
+
+    /* Image tiles */
+    /* .image-tiles {
+      position: absolute;
+      bottom: 5%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      margin-top: 50px;
+    }
+
+    .image-tile {
+      width: 300px;
+      height: 200px;
+      background-color: #ccc;
+      margin: 10px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .image-tile:hover {
+      transform: scale(1.05);
+    }
+
+    .image-tile img {
+      width: 100%;
+      height: 100%;
+      
+      
+    } */
+
+    /* Footer styles */
+    footer {
+      background-color: #1e1e1e;
+      color: #fff;
+      padding: 12px 0;
+      text-align: center;
+      animation: fadeInUp 1s ease;
+     position: fixed;
+     bottom: 0;
+     width: 100%;
+     /* z-index: -111; */
+    }
+
+    /* Button styles */
+    .cta-button {
+      padding: 12px 24px;
+      background-color: #ff5722;
+      color: #fff;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      animation: pulse 1s infinite;
+      position: fixed;
+      right: 12px;
+      bottom: 58px;
+      transform: translate(-50% -50%);
+      
+    }
+    .wiki-button{
+      padding: 12px 24px;
+      background-color: #ff5722;
+      color: #fff;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      animation: pulse 1s infinite;
+      position: fixed;
+      left: 12px;
+      bottom: 58px;
+      transform: translate(-50% -50%);
+
+    }
+    .wiki-button:hover{
+      background-color: #ff7043;
+    }
+
+    .cta-button:hover {
+      background-color: #ff7043;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes zoomIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .contain {
+      width: 1000px;
+      display: flex;
+      align-items: center;
+    }
+   
+   @keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+/* gradient key frames  */
+@keyframes gradientAnimation {
+      0% {
+        background-position: 0% 90%;
+      }
+      100% {
+        background-position: 100% 80%;
+      }
+    }
+    
+  </style>
+</head>
+
+<body>
+
+  <!-- ----------------- No change ---------------->
+  <header>
+    <h1>Population Heat Map <i class="fa-solid fa-map fa-beat"></i></h1>
+  </header>
+
+  <div class="navbar">
+    <a href="{%url 'Main'%}">Home</a>
+    <a href="{%url 'about'%}">About</a>
+    <a href="{%url 'ContactPage'%}">Contact Us</a>
+    <a href="{%url 'MapDetails'%}">Know your Map</a>
+    
+     
+  </div>
+
+  <!-- -------------------------------------- -->
+
+  <div class="container1">
+
+    <div class="content">
+      <h2>Welcome to the Population Heat Map  <i class="fa-solid fa-map fa-beat"></i></h2>
+      <p>Explore population data using our interactive heat map. A population heat map is a visual representation of population density in a specific geographic area. It provides a way to understand and analyze the distribution of people across a region, highlighting areas of high and low population concentration.
+      </p>
+    </div>
+    <!-- Add more image tiles as needed -->
+
+    <!-- <div class="image-tiles">
+       <div class="imageAnimation">
+        <img src="https://images.pexels.com/photos/3050833/pexels-photo-3050833.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Image 1">
+      </div>
+      <div class="imageAnimation">
+        <img src="https://images.pexels.com/photos/6109670/pexels-photo-6109670.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Image 2">
+      </div>
+      <div class="imageAnimation">
+        <img src="https://images.pexels.com/photos/592753/pexels-photo-592753.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Image 3">
+      </div>
+    </div> 
+     
+  </div> -->
+  
+  
+  <!-- ------------------------ No change----------------- -->
+  <a class="cta-button" href="{%url 'map'%}">Explore the Map </a>
+  <a class="wiki-button" href="https://en.wikipedia.org/wiki/Heat_map">Learn  More</a>
+  
+
+  <footer>
+    &copy; 2023 Population Heat Map. All rights reserved.
+  </footer>
+
+
+</body>
+
+</html>
